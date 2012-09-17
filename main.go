@@ -27,8 +27,8 @@ func main() {
 func smsHandler(response http.ResponseWriter, request *http.Request) {
 	sms := ReceiveSms(request)
 	log.Printf("[smsHandler] incoming SMS: %s", sms)
-	body := FormatEmail(sms.Body)
-	SendEmail(config.EmailRecipient, body)
+	subject, body := FormatEmail(sms.Body)
+	SendEmail(config.EmailRecipient, subject, body)
 }
 
 func parseConfig() {

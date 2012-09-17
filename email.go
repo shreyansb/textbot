@@ -6,7 +6,11 @@ import (
 	"net/smtp"
 )
 
-func SendEmail(to, body string) {
+func SendEmail(to, subject, body string) {
+	// set up the email message to contain the subject header and the body
+	message := fmt.Sprintf("From:%s\nTo:%s\nSubject:%s\r\n%s",
+		config.EmailAddress, to, subject, body)
+
 	// Set up authentication information.
 	auth := smtp.PlainAuth("", config.EmailAddress, config.EmailPassword, config.EmailHost)
 
@@ -17,13 +21,19 @@ func SendEmail(to, body string) {
 		auth,
 		config.EmailAddress,
 		[]string{to},
-		[]byte(body),
+		[]byte(message),
 	)
 	if err != nil {
 		log.Printf("[email.SendEmail] error sending email: ", err)
 	}
 }
 
-func FormatEmail(body string) (string) {
-	return fmt.Sprintf("%s @%s", body, config.SmsNotebook)
+func FormatEmail(sms string) (subject, body string) {
+	if config.SmsNotebook != "" {
+		subject = fmt.Sprintf("@%s", config.SmsNotebook)
+	} else {
+		subject = sms
+	}
+	body = sms
+	return
 }
