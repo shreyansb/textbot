@@ -1,8 +1,8 @@
 package main
 
 import (
-    "encoding/json"
-    "io/ioutil"
+	"encoding/json"
+	"io/ioutil"
 	"log"
 	"net/http"
 )
@@ -10,12 +10,12 @@ import (
 var config Config
 
 type Config struct {
-    TwilioAccountSID, TwilioAuthToken, TwilioNumber string
-    EmailRecipient, EmailAddress, EmailPassword, EmailHost, EmailPort string
+	TwilioAccountSID, TwilioAuthToken, TwilioNumber                   string
+	EmailRecipient, EmailAddress, EmailPassword, EmailHost, EmailPort string
 }
 
 func main() {
-    parseConfig()
+	parseConfig()
 
 	http.HandleFunc("/sms", smsHandler)
 	if err := http.ListenAndServe(":8080", nil); err != nil {
@@ -30,14 +30,14 @@ func smsHandler(response http.ResponseWriter, request *http.Request) {
 }
 
 func parseConfig() {
-    path := "./beacon.conf"
-    b, err := ioutil.ReadFile(path)
-    if err != nil {
-        log.Fatal("[parseConfig] error reading config file: ", err)
-    }
-    
-    err = json.Unmarshal(b, &config)
-    if err != nil {
-        log.Fatal("[parseConfig] error parsing config json: ", err)
-    }
+	path := "./beacon.conf"
+	b, err := ioutil.ReadFile(path)
+	if err != nil {
+		log.Fatal("[parseConfig] error reading config file: ", err)
+	}
+
+	err = json.Unmarshal(b, &config)
+	if err != nil {
+		log.Fatal("[parseConfig] error parsing config json: ", err)
+	}
 }
