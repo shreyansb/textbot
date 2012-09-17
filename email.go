@@ -13,7 +13,7 @@ func SendEmail(to, body string) {
 	// Connect to the server, authenticate, set the sender and recipient,
 	// and send the email all in one step.
 	err := smtp.SendMail(
-		fmt.Sprintf("%s:587", EmailHost),
+		fmt.Sprintf("%s:%s", EmailHost, EmailPort),
 		auth,
 		EmailAddress,
 		[]string{to},
