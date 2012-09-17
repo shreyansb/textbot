@@ -32,7 +32,7 @@ func smsHandler(response http.ResponseWriter, request *http.Request) {
 }
 
 func parseConfig() {
-	path := "./beacon.conf"
+	path := "./textbot.conf"
 	b, err := ioutil.ReadFile(path)
 	if err != nil {
 		log.Fatal("[parseConfig] error reading config file: ", err)
