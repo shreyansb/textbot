@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-    SendEmail(EmailRecipient, "testing 123!")
+	SendEmail(EmailRecipient, "testing 123!")
 	http.HandleFunc("/sms", smsHandler)
 	if err := http.ListenAndServe(":8080", nil); err != nil {
 		log.Fatal("[main] ListenAndServe error: ", err)
