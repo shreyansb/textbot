@@ -8,14 +8,14 @@ import (
 
 func SendEmail(to, body string) {
 	// Set up authentication information.
-	auth := smtp.PlainAuth("", EmailAddress, EmailPassword, EmailHost)
+	auth := smtp.PlainAuth("", config.EmailAddress, config.EmailPassword, config.EmailHost)
 
 	// Connect to the server, authenticate, set the sender and recipient,
 	// and send the email all in one step.
 	err := smtp.SendMail(
-		fmt.Sprintf("%s:%s", EmailHost, EmailPort),
+		fmt.Sprintf("%s:%s", config.EmailHost, config.EmailPort),
 		auth,
-		EmailAddress,
+		config.EmailAddress,
 		[]string{to},
 		[]byte(body),
 	)

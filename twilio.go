@@ -12,7 +12,7 @@ import (
 
 var (
 	sendSMSUrl = fmt.Sprintf("https://api.twilio.com/2010-04-01/Accounts/%s/SMS/Messages.json",
-		TwilioAccountSID)
+		config.TwilioAccountSID)
 	client *http.Client
 )
 
@@ -48,7 +48,7 @@ func SendSms(from, to, message string) (response TwilioResponse, err error) {
 
 	// create request object
 	req, err := http.NewRequest("POST", sendSMSUrl, reqBody)
-	req.SetBasicAuth(TwilioAccountSID, TwilioAuthToken)
+	req.SetBasicAuth(config.TwilioAccountSID, config.TwilioAuthToken)
 	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
 
 	// send request
