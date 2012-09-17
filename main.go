@@ -12,6 +12,7 @@ var config Config
 type Config struct {
 	TwilioAccountSID, TwilioAuthToken, TwilioNumber                   string
 	EmailRecipient, EmailAddress, EmailPassword, EmailHost, EmailPort string
+	SmsNotebook                                                       string
 }
 
 func main() {
@@ -26,7 +27,8 @@ func main() {
 func smsHandler(response http.ResponseWriter, request *http.Request) {
 	sms := ReceiveSms(request)
 	log.Printf("[smsHandler] incoming SMS: %s", sms)
-	SendEmail(config.EmailRecipient, sms.Body)
+	body := FormatEmail(sms.Body)
+	SendEmail(config.EmailRecipient, body)
 }
 
 func parseConfig() {

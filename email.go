@@ -23,3 +23,7 @@ func SendEmail(to, body string) {
 		log.Printf("[email.SendEmail] error sending email: ", err)
 	}
 }
+
+func FormatEmail(body string) {
+	return fmt.Sprintf("%s @%s", body, config.SmsNotebook)
+}
