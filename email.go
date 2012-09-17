@@ -24,6 +24,6 @@ func SendEmail(to, body string) {
 	}
 }
 
-func FormatEmail(body string) {
+func FormatEmail(body string) (string) {
 	return fmt.Sprintf("%s @%s", body, config.SmsNotebook)
 }
