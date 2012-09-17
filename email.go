@@ -30,7 +30,7 @@ func SendEmail(to, subject, body string) {
 
 func FormatEmail(sms string) (subject, body string) {
 	if config.SmsNotebook != "" {
-		subject = fmt.Sprintf("@%s +", config.SmsNotebook)
+		subject = fmt.Sprintf("via sms @%s +", config.SmsNotebook)
 	} else {
 		subject = sms
 	}
